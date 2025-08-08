@@ -62,6 +62,7 @@
                         <p><span class="font-semibold">Nama:</span> Aan Faturohman, S.Sn</p>
                         <p><span class="font-semibold">Mata Pelajaran:</span> INFORMATIKA</p>
                         <p><span class="font-semibold">Tanggal:</span> <span id="currentDate"></span></p>
+                        <input type="date" id="rekapTanggal" />
                     </div>
                 </div>
                 <div>
@@ -129,13 +130,13 @@
     </div>
 
     <!-- Page 2: Rekap -->
-    <div id="pageRekap" class="container mx-auto px-4 hidden">
+    <div id="pageRekap" class="container mx-auto px-4 hidden ">
         <div class="bg-white rounded-xl card-shadow p-6">
             <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Rekapan Kehadiran Siswa</h3>
             
             <!-- Filter Controls -->
-            <div class="grid md:grid-cols-3 gap-4 mb-6">
-                <select id="rekapKelas" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <div class="flex flex-wrap gap-4 mb-6 justify-center">
+                <select id="rekapKelas" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
                     <option value="">Semua Kelas</option>
                     <option value="X AKL 1">X AKL 1</option>
                     <option value="X AKL 2">X AKL 2</option>
@@ -147,8 +148,11 @@
                     <option value="X TKJ 2">X TKJ 2</option>
                     <option value="X TKJ 3">X TKJ 3</option>
                 </select>
-                <input type="date" id="rekapTanggal" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                <select id="rekapBulan" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+
+                <input type="date" id="rekapTanggalAwal" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
+                <input type="date" id="rekapTanggalAkhir" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
+
+                <select id="rekapBulan" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
                     <option value="">Pilih Bulan</option>
                     <option value="01">Januari</option>
                     <option value="02">Februari</option>
@@ -163,7 +167,9 @@
                     <option value="11">November</option>
                     <option value="12">Desember</option>
                 </select>
-            </div>
+                </div>
+
+        </div>
 
             <!-- Action Buttons -->
             <div class="flex flex-wrap gap-4 justify-center mb-6">
@@ -265,54 +271,54 @@
         // Data siswa
         const studentsData = {
             "X AKL 1": [
-  {nama: "AGUM PAJAINUR RAMDANI", nis: "252610431"},
-  {nama: "Ajeng Rahmawati", nis: "252610432"},
-  {nama: "Akhmad Labib Pratama", nis: "252610433"},
-  {nama: "ALFARIZI THALIB", nis: "252610434"},
-  {nama: "Alfiah Setiawati", nis: "252610435"},
-  {nama: "ALYA ZAHRA", nis: "252610436"},
-  {nama: "AUREVA D CLARISA", nis: "252610437"},
-  {nama: "Ayu Nurfitriyani", nis: "252610438"},
-  {nama: "BILQIS ERINA HILWANA", nis: "252610439"},
-  {nama: "CAHYA DINA CYNTHIYA", nis: "252610440"},
-  {nama: "CALLYSTA CHERRY AQILAH", nis: "252610441"},
-  {nama: "CHAILA AYERIN", nis: "252610442"},
-  {nama: "DESTIANA UTAMI", nis: "252610443"},
-  {nama: "DIVA TRI APRILLIA DUMA SUGANDA", nis: "252610444"},
-  {nama: "FADILLAH RAMADHANI", nis: "252610445"},
-  {nama: "Fikri gifari", nis: "252610446"},
-  {nama: "Given queenqa amor", nis: "252610447"},
-  {nama: "ITA ANDRI YANI", nis: "252610448"},
-  {nama: "JULIANT KIMBILLCENT MOONIK", nis: "252610449"},
-  {nama: "Khaira Masrur Wahyudi", nis: "252610450"},
-  {nama: "LIA SAFITRI", nis: "252610451"},
-  {nama: "Lintang Tiana", nis: "252610452"},
-  {nama: "Maulinda nur Safira", nis: "252610453"},
-  {nama: "MEILANI PUTRI", nis: "252610454"},
-  {nama: "MOHAMMAD AKBAR MAULANA", nis: "252610455"},
-  {nama: "MOHAMMAD IQBAL MAULANA", nis: "252610456"},
-  {nama: "Muhammad Al Vino", nis: "252610457"},
-  {nama: "NADIA NURFADILLAH", nis: "252610458"},
-  {nama: "NADILA PUTRI", nis: "252610459"},
-  {nama: "nova ritanti", nis: "252610460"},
-  {nama: "Nurul yasin Aisyah", nis: "252610461"},
-  {nama: "PINA PUYAYAH", nis: "252610462"},
-  {nama: "PIPIT AISAH", nis: "252610463"},
-  {nama: "PUTRI GUNAWAN", nis: "252610464"},
-  {nama: "QUINSHA FELICIA", nis: "252610465"},
-  {nama: "Rahmawati", nis: "252610466"},
-  {nama: "ROJA KURNIAWAN", nis: "252610467"},
-  {nama: "SAFIRA NISA", nis: "252610468"},
-  {nama: "SEPTINAH TRI RAHMADHANI", nis: "252610469"},
-  {nama: "SHEREEN LOVINA SIAGIAN", nis: "252610470"},
-  {nama: "Shinta wijaya", nis: "252610471"},
-  {nama: "Siti nur Kholifah", nis: "252610472"},
-  {nama: "Siti nurana", nis: "252610473"},
-  {nama: "Sriyuwanengsih", nis: "252610474"},
-  {nama: "Syafa Amelia Putri Az Zahra", nis: "252610475"},
-  {nama: "SYILA ALMIRA NUR'AINI", nis: "252610476"},
-  {nama: "WAFA HANIM AZZAHRA", nis: "252610477"},
-  {nama: "ZASKIA", nis: "252610478"}
+{nama: "AGUM PAJAINUR RAMDANI", nis: "252610431"},
+{nama: "Ajeng Rahmawati", nis: "252610432"},
+{nama: "Akhmad Labib Pratama", nis: "252610433"},
+{nama: "ALFARIZI THALIB", nis: "252610434"},
+{nama: "Alfiah Setiawati", nis: "252610435"},
+{nama: "ALYA ZAHRA", nis: "252610436"},
+{nama: "AUREVA D CLARISA", nis: "252610437"},
+{nama: "Ayu Nurfitriyani", nis: "252610438"},
+{nama: "BILQIS ERINA HILWANA", nis: "252610439"},
+{nama: "CAHYA DINA CYNTHIYA", nis: "252610440"},
+{nama: "CALLYSTA CHERRY AQILAH", nis: "252610441"},
+{nama: "CHAILA AYERIN", nis: "252610442"},
+{nama: "DESTIANA UTAMI", nis: "252610443"},
+{nama: "DIVA TRI APRILLIA DUMA SUGANDA", nis: "252610444"},
+{nama: "FADILLAH RAMADHANI", nis: "252610445"},
+{nama: "Fikri gifari", nis: "252610446"},
+{nama: "Given queenqa amor", nis: "252610447"},
+{nama: "ITA ANDRI YANI", nis: "252610448"},
+{nama: "JULIANT KIMBILLCENT MOONIK", nis: "252610449"},
+{nama: "Khaira Masrur Wahyudi", nis: "252610450"},
+{nama: "LIA SAFITRI", nis: "252610451"},
+{nama: "Lintang Tiana", nis: "252610452"},
+{nama: "Maulinda nur Safira", nis: "252610453"},
+{nama: "MEILANI PUTRI", nis: "252610454"},
+{nama: "MOHAMMAD AKBAR MAULANA", nis: "252610455"},
+{nama: "MOHAMMAD IQBAL MAULANA", nis: "252610456"},
+{nama: "Muhammad Al Vino", nis: "252610457"},
+{nama: "NADIA NURFADILLAH", nis: "252610458"},
+{nama: "NADILA PUTRI", nis: "252610459"},
+{nama: "nova ritanti", nis: "252610460"},
+{nama: "Nurul yasin Aisyah", nis: "252610461"},
+{nama: "PINA PUYAYAH", nis: "252610462"},
+{nama: "PIPIT AISAH", nis: "252610463"},
+{nama: "PUTRI GUNAWAN", nis: "252610464"},
+{nama: "QUINSHA FELICIA", nis: "252610465"},
+{nama: "Rahmawati", nis: "252610466"},
+{nama: "ROJA KURNIAWAN", nis: "252610467"},
+{nama: "SAFIRA NISA", nis: "252610468"},
+{nama: "SEPTINAH TRI RAHMADHANI", nis: "252610469"},
+{nama: "SHEREEN LOVINA SIAGIAN", nis: "252610470"},
+{nama: "Shinta wijaya", nis: "252610471"},
+{nama: "Siti nur Kholifah", nis: "252610472"},
+{nama: "Siti nurana", nis: "252610473"},
+{nama: "Sriyuwanengsih", nis: "252610474"},
+{nama: "Syafa Amelia Putri Az Zahra", nis: "252610475"},
+{nama: "SYILA ALMIRA NUR'AINI", nis: "252610476"},
+{nama: "WAFA HANIM AZZAHRA", nis: "252610477"},
+{nama: "ZASKIA", nis: "252610478"}
             ],
             "X AKL 2": [
   {nama: "AGUNG WINANTA", nis: "252610479"},
@@ -712,26 +718,63 @@
         let currentClass = '';
         let attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            setCurrentDate();
-            loadKelasSelect();
+        document.getElementById('kelasSelect').addEventListener('change', function () {
+            const selectedClass = this.value;
+            currentClass = selectedClass;
+
+            if (studentsData[selectedClass]) {
+                showStudents(studentsData[selectedClass]);
+                document.getElementById('kelasTitle').textContent = "Daftar Siswa " + selectedClass;
+                document.getElementById('studentTable').classList.remove('hidden');
+                document.getElementById('controlButtons').classList.remove('hidden');
+            } else {
+                document.getElementById('studentTableBody').innerHTML = '';
+                document.getElementById('studentTable').classList.add('hidden');
+                document.getElementById('controlButtons').classList.add('hidden');
+            }
         });
 
-        function setCurrentDate() {
+        function showStudents(studentList) {
+            const tbody = document.getElementById('studentTableBody');
+            tbody.innerHTML = ''; // bersihkan isi sebelumnya
+
+            studentList.forEach((student, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-4 py-2">${index + 1}</td>
+                    <td class="px-4 py-2">${student.nama}</td>
+                    <td class="px-4 py-2">${student.nis}</td>
+                    <td class="px-4 py-2 text-center"><input type="radio" name="status-${index}" value="Hadir" checked></td>
+                    <td class="px-4 py-2 text-center"><input type="radio" name="status-${index}" value="Izin"></td>
+                    <td class="px-4 py-2 text-center"><input type="radio" name="status-${index}" value="Sakit"></td>
+                    <td class="px-4 py-2 text-center"><input type="radio" name="status-${index}" value="Absen"></td>
+                    <td class="px-4 py-2"><input type="text" class="w-full border border-gray-300 rounded px-2 py-1" placeholder="Keterangan"></td>
+                    <td class="px-4 py-2 text-center">-</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+
+       function setCurrentDate() {
             const today = new Date();
             const dateString = today.toLocaleDateString('id-ID', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
             });
             document.getElementById('currentDate').textContent = dateString;
-            
+
             // Set date input to today
             const dateInput = document.getElementById('rekapTanggal');
+            if (dateInput) {
             dateInput.value = today.toISOString().split('T')[0];
+            }
         }
+
+        window.onload = setCurrentDate;
+
 
         function loadKelasSelect() {
             const kelasSelect = document.getElementById('kelasSelect');
@@ -748,6 +791,20 @@
                 }
             });
         }
+        document.getElementById("kelasSelect").addEventListener("change", function () {
+            const selectedClass = this.value;
+            if (selectedClass) {
+                currentClass = selectedClass;
+                document.getElementById("controlButtons").classList.remove("hidden");
+                document.getElementById("studentTable").classList.remove("hidden");
+                loadStudentTable(selectedClass);
+            } else {
+                currentClass = "";
+                document.getElementById("controlButtons").classList.add("hidden");
+                document.getElementById("studentTable").classList.add("hidden");
+            }
+        });
+
 
         function loadStudentTable(className) {
             const students = studentsData[className] || [];
@@ -888,27 +945,40 @@
 
         function filterRekap() {
             const kelas = document.getElementById('rekapKelas').value;
-            const tanggal = document.getElementById('rekapTanggal').value;
+            const tanggalAwal = document.getElementById('rekapTanggalAwal').value;
+            const tanggalAkhir = document.getElementById('rekapTanggalAkhir').value;
             const bulan = document.getElementById('rekapBulan').value;
             const tableBody = document.getElementById('rekapTableBody');
-            
+
             let filteredData = [];
-            
+
             Object.keys(attendanceData).forEach(key => {
                 const data = attendanceData[key];
                 let include = true;
-                
+
+                // Filter berdasarkan kelas
                 if (kelas && data.kelas !== kelas) include = false;
-                if (tanggal && data.tanggal !== tanggal) include = false;
+
+                // Filter berdasarkan bulan
                 if (bulan && !data.tanggal.includes(`-${bulan}-`)) include = false;
-                
+
+                // Filter berdasarkan range tanggal
+                if (tanggalAwal && tanggalAkhir) {
+                    const tgl = new Date(data.tanggal);
+                    const tglAwal = new Date(tanggalAwal);
+                    const tglAkhir = new Date(tanggalAkhir);
+                    if (tgl < tglAwal || tgl > tglAkhir) include = false;
+                }
+
                 if (include) {
                     filteredData.push(data);
                 }
             });
-            
+
+            // Kosongkan isi tabel
             tableBody.innerHTML = '';
-            
+
+            // Jika tidak ada data
             if (filteredData.length === 0) {
                 tableBody.innerHTML = `
                     <tr>
@@ -919,18 +989,19 @@
                 `;
                 return;
             }
-            
+
+            // Isi ulang tabel
             filteredData.forEach((data, index) => {
                 const row = document.createElement('tr');
                 row.className = 'border-b hover:bg-gray-50';
-                
+
                 const statusColor = {
                     'hadir': 'text-green-600 font-semibold',
                     'izin': 'text-yellow-600 font-semibold',
                     'sakit': 'text-blue-600 font-semibold',
                     'absen': 'text-red-600 font-semibold'
                 };
-                
+
                 row.innerHTML = `
                     <td class="px-4 py-3">${index + 1}</td>
                     <td class="px-4 py-3 font-medium">${data.nama}</td>
@@ -944,32 +1015,45 @@
             });
         }
 
+
         function printRekap() {
             window.print();
         }
 
         function exportRekapToExcel() {
             const kelas = document.getElementById('rekapKelas').value;
-            const tanggal = document.getElementById('rekapTanggal').value;
+            const tanggalAwal = document.getElementById('rekapTanggalAwal').value;
+            const tanggalAkhir = document.getElementById('rekapTanggalAkhir').value;
             const bulan = document.getElementById('rekapBulan').value;
-            
+
             let filteredData = [];
-            
+
             Object.keys(attendanceData).forEach(key => {
                 const data = attendanceData[key];
                 let include = true;
-                
+
+                // Filter berdasarkan kelas
                 if (kelas && data.kelas !== kelas) include = false;
-                if (tanggal && data.tanggal !== tanggal) include = false;
+
+                // Filter berdasarkan bulan
                 if (bulan && !data.tanggal.includes(`-${bulan}-`)) include = false;
-                
+
+                // Filter berdasarkan rentang tanggal
+                if (tanggalAwal && tanggalAkhir) {
+                    const tgl = new Date(data.tanggal);
+                    const tglAwal = new Date(tanggalAwal);
+                    const tglAkhir = new Date(tanggalAkhir);
+                    if (tgl < tglAwal || tgl > tglAkhir) include = false;
+                }
+
                 if (include) {
                     filteredData.push(data);
                 }
             });
-            
+
+            // Siapkan data untuk Excel
             const data = [['No', 'Nama Siswa', 'Kelas', 'NIS', 'Tanggal', 'Status', 'Keterangan']];
-            
+
             filteredData.forEach((item, index) => {
                 data.push([
                     index + 1,
@@ -981,14 +1065,21 @@
                     item.keterangan || '-'
                 ]);
             });
-            
+
+            // Buat dan ekspor file Excel
             const ws = XLSX.utils.aoa_to_sheet(data);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Rekap Kehadiran');
-            
-            const filename = `Rekap_Kehadiran_${kelas || 'Semua_Kelas'}_${new Date().toISOString().split('T')[0]}.xlsx`;
+
+            // Nama file dinamis
+            const tglLabel = (tanggalAwal && tanggalAkhir)
+                ? `${tanggalAwal}_sd_${tanggalAkhir}`
+                : new Date().toISOString().split('T')[0];
+
+            const filename = `Rekap_Kehadiran_${kelas || 'Semua_Kelas'}_${tglLabel}.xlsx`;
             XLSX.writeFile(wb, filename);
         }
+
 
         function showAddStudentModal() {
             document.getElementById('addStudentModal').classList.remove('hidden');
@@ -1002,36 +1093,48 @@
         }
 
         function addNewStudent() {
-            const nama = document.getElementById('newStudentName').value.trim();
-            const nis = document.getElementById('newStudentNIS').value.trim();
-            const kelas = document.getElementById('newStudentClass').value;
-            
-            if (!nama || !nis || !kelas) {
-                alert('Mohon lengkapi semua data siswa!');
-                return;
-            }
-            
-            if (!studentsData[kelas]) {
-                studentsData[kelas] = [];
-            }
-            
-            // Check if NIS already exists
-            const existingStudent = studentsData[kelas].find(student => student.nis === nis);
-            if (existingStudent) {
-                alert('NIS sudah ada di kelas ini!');
-                return;
-            }
-            
-            studentsData[kelas].push({nama, nis});
-            
-            // Refresh table if current class matches
-            if (currentClass === kelas) {
-                loadStudentTable(kelas);
-            }
-            
-            closeAddStudentModal();
-            alert('Siswa berhasil ditambahkan!');
-        }
+    const nama = document.getElementById('newStudentName').value.trim();
+    const nis = document.getElementById('newStudentNIS').value.trim();
+    const kelas = document.getElementById('newStudentClass').value;
+
+    if (!nama || !nis || !kelas) {
+        alert('Mohon lengkapi semua data siswa!');
+        return;
+    }
+
+    // Jika kelas belum ada di data, buat array baru
+    if (!studentsData[kelas]) {
+        studentsData[kelas] = [];
+    }
+
+    // Cek NIS sudah ada di kelas itu atau belum
+    const existingStudent = studentsData[kelas].find(student => student.nis === nis);
+    if (existingStudent) {
+        alert('NIS sudah ada di kelas ini!');
+        return;
+    }
+
+    // Tambah siswa baru
+    studentsData[kelas].push({ nama, nis });
+
+    // Jika sedang lihat kelas ini, refresh tabelnya
+    if (currentClass === kelas) {
+        loadStudentTable(kelas);
+    }
+
+    // Tutup modal dan reset input
+    closeAddStudentModal();
+
+    alert('Siswa berhasil ditambahkan!');
+}
+
+function closeAddStudentModal() {
+    document.getElementById('addStudentModal').classList.add('hidden');
+    document.getElementById('newStudentName').value = '';
+    document.getElementById('newStudentNIS').value = '';
+    document.getElementById('newStudentClass').value = '';
+}
+
 
         function deleteStudent(className, nis) {
             if (confirm('Yakin ingin menghapus siswa ini?')) {
